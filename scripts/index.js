@@ -6,7 +6,7 @@ const store = {
     { name: 'milk', checked: true },
     { name: 'bread', checked: false }
   ],
-  toggleCheckedFilter: false,
+  hideCheckedItems: false,
   searchTerm: ''
 };
 

@@ -39,7 +39,7 @@ const shoppingList = (function(){
   function render() {
     // Filter item list if store prop is true by item.checked === false
     let items = store.items;
-    if (store.toggleCheckedFilter) {
+    if (store.hideCheckedItems) {
       items = store.items.filter(item => !item.checked);
     }
   
@@ -120,8 +120,8 @@ const shoppingList = (function(){
     store.items[itemIndex].name = itemName;
   }
   
-  function toggleCheckedFilter() {
-    store.toggleCheckedFilter = !store.toggleCheckedFilter;
+  function toggleCheckedItemsFilter() {
+    store.hideCheckedItems = !store.hideCheckedItems;
   }
   
   function setSearchTerm(val) {
@@ -154,7 +154,7 @@ const shoppingList = (function(){
   
   function handleToggleFilterClick() {
     $('.js-filter-checked').click(() => {
-      toggleCheckedFilter();
+      toggleCheckedItemsFilter();
       render();
     });
   }
