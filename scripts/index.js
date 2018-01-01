@@ -1,10 +1,12 @@
+/* global cuid */
+
 // eslint-disable-next-line no-unused-vars
 const store = {
   items: [
-    { name: 'apples', checked: false },
-    { name: 'oranges', checked: false },
-    { name: 'milk', checked: true },
-    { name: 'bread', checked: false }
+    { id: cuid(), name: 'apples', checked: false },
+    { id: cuid(), name: 'oranges', checked: false },
+    { id: cuid(), name: 'milk', checked: true },
+    { id: cuid(), name: 'bread', checked: false }
   ],
   hideCheckedItems: false,
   searchTerm: ''
