@@ -1,4 +1,4 @@
-/* global cuid */
+/* global shoppingList, cuid */
 
 // eslint-disable-next-line no-unused-vars
 const store = {
@@ -12,7 +12,6 @@ const store = {
   searchTerm: ''
 };
 
-/* global shoppingList */
 $(document).ready(function() {
   shoppingList.bindEventListeners();
   shoppingList.render();
