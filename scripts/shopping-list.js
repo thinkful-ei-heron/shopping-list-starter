@@ -62,7 +62,6 @@ const shoppingList = (function(){
   function handleNewItemSubmit() {
     $('#js-shopping-list-form').submit(function (event) {
       event.preventDefault();
-      console.log('`handleNewItemSubmit` ran');
       const newItemName = $('.js-shopping-list-entry').val();
       $('.js-shopping-list-entry').val('');
       addItemToShoppingList(newItemName);
@@ -80,13 +79,6 @@ const shoppingList = (function(){
     return $(item)
       .closest('.js-item-element')
       .data('item-id');
-  }
-  
-  function getItemNameFromElement(item) {
-    const itemName = $(item)
-      .find('.shopping-item')
-      .val();
-    return itemName;
   }
   
   function handleItemCheckClicked() {
@@ -131,9 +123,8 @@ const shoppingList = (function(){
   function handleEditShoppingItemSubmit() {
     $('.js-shopping-list').on('submit', '#js-edit-item', event => {
       event.preventDefault();
-      console.log(event.currentTarget);
       const id = getItemIdFromElement(event.currentTarget);
-      const itemName = getItemNameFromElement(event.currentTarget);
+      const itemName = $(event.currentTarget).find('.shopping-item').val();
       editListItemName(id, itemName);
       render();
     });
