@@ -90,7 +90,7 @@ const shoppingList = (function(){
   }
   
   function deleteListItem(id) {
-    const index = store.items.find(item => item.id === id);
+    const index = store.items.findIndex(item => item.id === id);
     store.items.splice(index, 1);
   }
   
