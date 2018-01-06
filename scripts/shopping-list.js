@@ -154,7 +154,7 @@ const shoppingList = (function(){
     handleShoppingListSearch();
   }
 
-  // The object we return is the ONLY publically available attributes/methods:
+  // This object contains the only exposed methods from this module:
   return {
     render,
     bindEventListeners
