@@ -156,7 +156,7 @@ const shoppingList = (function(){
 
   // This object contains the only exposed methods from this module:
   return {
-    render,
-    bindEventListeners
+    render: render,
+    bindEventListeners: bindEventListeners,
   };
 }());
