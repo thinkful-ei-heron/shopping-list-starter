@@ -83,8 +83,8 @@ const shoppingList = (function(){
   
   function handleItemCheckClicked() {
     $('.js-shopping-list').on('click', '.js-item-toggle', event => {
-      const itemIndex = getItemIdFromElement(event.currentTarget);
-      toggleCheckedForListItem(itemIndex);
+      const id = getItemIdFromElement(event.currentTarget);
+      toggleCheckedForListItem(id);
       render();
     });
   }
