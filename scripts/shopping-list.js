@@ -7,7 +7,7 @@ const shoppingList = (function(){
     let itemTitle = `<span class="shopping-item shopping-item__checked">${item.name}</span>`;
     if (!item.checked) {
       itemTitle = `
-        <form id="js-edit-item">
+        <form class="js-edit-item">
           <input class="shopping-item type="text" value="${item.name}" />
         </form>
       `;
@@ -121,7 +121,7 @@ const shoppingList = (function(){
   }
   
   function handleEditShoppingItemSubmit() {
-    $('.js-shopping-list').on('submit', '#js-edit-item', event => {
+    $('.js-shopping-list').on('submit', '.js-edit-item', event => {
       event.preventDefault();
       const id = getItemIdFromElement(event.currentTarget);
       const itemName = $(event.currentTarget).find('.shopping-item').val();
