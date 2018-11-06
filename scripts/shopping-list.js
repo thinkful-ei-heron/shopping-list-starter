@@ -36,14 +36,14 @@ const shoppingList = (function(){
   
   function render() {
     // Filter item list if store prop is true by item.checked === false
-    let items = store.items;
+    let items = [ ...store.items ];
     if (store.hideCheckedItems) {
-      items = store.items.filter(item => !item.checked);
+      items = items.filter(item => !item.checked);
     }
   
     // Filter item list if store prop `searchTerm` is not empty
     if (store.searchTerm) {
-      items = store.items.filter(item => item.name.includes(store.searchTerm));
+      items = items.filter(item => item.name.includes(store.searchTerm));
     }
   
     // render the shopping list in the DOM
