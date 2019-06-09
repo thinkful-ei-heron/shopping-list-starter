@@ -13,7 +13,9 @@ const store = {
   searchTerm: ''
 };
 
-$(document).ready(function() {
+function main() {
   shoppingList.bindEventListeners();
   shoppingList.render();
-});
+}
+
+$(main);
