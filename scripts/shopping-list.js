@@ -9,7 +9,7 @@ const shoppingList = (function(){
     if (!item.checked) {
       itemTitle = `
         <form class="js-edit-item">
-          <input class="shopping-item type="text" value="${item.name}" />
+          <input class="shopping-item" type="text" value="${item.name}" />
         </form>
       `;
     }
