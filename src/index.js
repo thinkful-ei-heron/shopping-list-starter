@@ -3,9 +3,7 @@ import $ from 'jquery';
 import 'normalize.css';
 import './index.css';
 
-import shoppingList from './shopping-list.js';
-// import store from './store.js';
-// import item from './item.js';
+import shoppingList from './shopping-list';
 
 function main() {
   shoppingList.bindEventListeners();
