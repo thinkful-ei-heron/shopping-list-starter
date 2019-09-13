@@ -13,9 +13,21 @@ const createItem = function (name) {
     },
     body: newItem
   });
-}
+};
+
+const updateItem = function (id, updateData) {
+  const newData = JSON.stringify(updateData);
+  return listApiFetch(BASE_URL + '/items/' + id, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: newData
+  });
+};
 
 export default {
   getItems,
-  createItem
+  createItem,
+  updateItem
 };

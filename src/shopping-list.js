@@ -2,6 +2,7 @@ import $ from 'jquery';
 
 import store from './store';
 import item from './item';
+import api from './api';
 
 function generateItemElement(item) {
   let itemTitle = `<span class="shopping-item shopping-item__checked">${item.name}</span>`;
@@ -66,8 +67,15 @@ function handleNewItemSubmit() {
     event.preventDefault();
     const newItemName = $('.js-shopping-list-entry').val();
     $('.js-shopping-list-entry').val('');
-    store.addItem(newItemName);
-    render();
+    api.createItem(newItemName)
+      .then((newItem) => {
+        store.addItem(newItem);
+        render();
+      })
+      .catch((err) => {
+        store.setError(err.message);
+        renderError();
+      });
   });
 }
 
@@ -102,8 +110,17 @@ function handleEditShoppingItemSubmit() {
     event.preventDefault();
     const id = getItemIdFromElement(event.currentTarget);
     const itemName = $(event.currentTarget).find('.shopping-item').val();
-    store.findAndUpdateName(id, itemName);
-    render();
+    api.updateItem(id, { name: itemName })
+      .then(() => {
+        store.findAndUpdate(id, { name: itemName });
+        store.setItemIsEditing(id, false);
+        render();
+      })
+      .catch((err) => {
+        console.log(err);
+        store.setError(err.message);
+        // renderError();
+      });
   });
 }
 
