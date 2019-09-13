@@ -1,0 +1,35 @@
+{
+  "name": "shopping-list-starter",
+  "version": "1.0.0",
+  "description": "Created for the Thinkful EI Program.",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server",
+    "build": "webpack --mode production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thinkful-ei-heron/shopping-list-starter.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thinkful-ei-heron/shopping-list-starter/issues"
+  },
+  "homepage": "https://github.com/thinkful-ei-heron/shopping-list-starter#readme",
+  "devDependencies": {
+    "css-loader": "^3.2.0",
+    "file-loader": "^4.2.0",
+    "html-webpack-plugin": "^3.2.0",
+    "style-loader": "^1.0.0",
+    "webpack": "^4.40.1",
+    "webpack-cli": "^3.3.8",
+    "webpack-dev-server": "^3.8.0"
+  },
+  "dependencies": {
+    "cuid": "^2.1.6",
+    "jquery": "^3.4.1",
+    "normalize.css": "^8.0.1"
+  }
+}
