@@ -1,13 +1,5 @@
-const store = {
-  items: [
-    { id: cuid(), name: "apples", checked: false },
-    { id: cuid(), name: "oranges", checked: false },
-    { id: cuid(), name: "milk", checked: true },
-    { id: cuid(), name: "bread", checked: false }
-  ],
-  hideCheckedItems: false,
-  searchTerm: ''
-};
+import store from './store.js';
+import item from './item.js';
 
 function generateItemElement(item) {
   let itemTitle = `<span class="shopping-item shopping-item__checked">${item.name}</span>`;
@@ -33,12 +25,10 @@ function generateItemElement(item) {
     </li>`;
 }
 
-
 function generateShoppingItemsString(shoppingList) {
   const items = shoppingList.map((item) => generateItemElement(item));
   return items.join('');
 }
-
 
 function render() {
   // Filter item list if store prop is true by item.checked === false
@@ -60,9 +50,14 @@ function render() {
   $('.js-shopping-list').html(shoppingListItemsString);
 }
 
-
 function addItemToShoppingList(itemName) {
-  store.items.push({ id: cuid(), name: itemName, checked: false });
+  try {
+    item.validateName(itemName);
+    store.items.push(item.create(itemName));
+    render();
+  } catch (error) {
+    console.log(`Cannot add item: ${error.message}`);
+  }
 }
 
 function handleNewItemSubmit() {
@@ -70,16 +65,10 @@ function handleNewItemSubmit() {
     event.preventDefault();
     const newItemName = $('.js-shopping-list-entry').val();
     $('.js-shopping-list-entry').val('');
-    addItemToShoppingList(newItemName);
+    store.addItem(newItemName);
     render();
   });
 }
-
-function toggleCheckedForListItem(id) {
-  const foundItem = store.items.find(item => item.id === id);
-  foundItem.checked = !foundItem.checked;
-}
-
 
 function getItemIdFromElement(item) {
   return $(item)
@@ -90,29 +79,10 @@ function getItemIdFromElement(item) {
 function handleItemCheckClicked() {
   $('.js-shopping-list').on('click', '.js-item-toggle', event => {
     const id = getItemIdFromElement(event.currentTarget);
-    toggleCheckedForListItem(id);
+    store.findAndToggleChecked(id);
     render();
   });
 }
-
-function deleteListItem(id) {
-  const index = store.items.findIndex(item => item.id === id);
-  store.items.splice(index, 1);
-}
-
-function editListItemName(id, itemName) {
-  const item = store.items.find(item => item.id === id);
-  item.name = itemName;
-}
-
-function toggleCheckedItemsFilter() {
-  store.hideCheckedItems = !store.hideCheckedItems;
-}
-
-function setSearchTerm(val) {
-  store.searchTerm = val;
-}
-
 
 function handleDeleteItemClicked() {
   // like in `handleItemCheckClicked`, we use event delegation
@@ -120,7 +90,7 @@ function handleDeleteItemClicked() {
     // get the index of the item in store.items
     const id = getItemIdFromElement(event.currentTarget);
     // delete the item
-    deleteListItem(id);
+    store.findAndDelete(id);
     // render the updated shopping list
     render();
   });
@@ -131,14 +101,14 @@ function handleEditShoppingItemSubmit() {
     event.preventDefault();
     const id = getItemIdFromElement(event.currentTarget);
     const itemName = $(event.currentTarget).find('.shopping-item').val();
-    editListItemName(id, itemName);
+    store.findAndUpdateName(id, itemName);
     render();
   });
 }
 
 function handleToggleFilterClick() {
   $('.js-filter-checked').click(() => {
-    toggleCheckedItemsFilter();
+    store.toggleCheckedFilter();
     render();
   });
 }
@@ -146,7 +116,7 @@ function handleToggleFilterClick() {
 function handleShoppingListSearch() {
   $('.js-shopping-list-search-entry').on('keyup', event => {
     const val = $(event.currentTarget).val();
-    setSearchTerm(val);
+    store.setSearchTerm(val);
     render();
   });
 }
