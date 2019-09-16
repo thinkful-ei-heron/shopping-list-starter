@@ -5,17 +5,14 @@ import './index.css';
 
 import shoppingList from './shopping-list.js';
 import store from './store.js';
-import item from './item.js';
 import api from './api.js';
 
 function main() {
-
   api.getItems()
-    .then(res => console.log(res));
-
-  console.log(api.BASE_URL);
-
-
+    .then((items) => {
+      items.forEach((item) => store.addItem(item));
+      shoppingList.render();
+    });
   shoppingList.bindEventListeners();
   shoppingList.render();
 }
