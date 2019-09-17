@@ -7,7 +7,7 @@ import shoppingList from './shopping-list.js';
 import store from './store.js';
 import api from './api.js';
 
-function main() {
+const main = function () {
   api.getItems()
     .then((items) => {
       items.forEach((item) => store.addItem(item));
@@ -15,6 +15,6 @@ function main() {
     });
   shoppingList.bindEventListeners();
   shoppingList.render();
-}
+};
 
 $(main);

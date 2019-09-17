@@ -3,7 +3,7 @@ import $ from 'jquery';
 import store from './store';
 import api from './api';
 
-function generateItemElement(item) {
+const generateItemElement = function (item) {
   let itemTitle = `<span class="shopping-item shopping-item__checked">${item.name}</span>`;
   if (!item.checked) {
     itemTitle = `
@@ -25,39 +25,39 @@ function generateItemElement(item) {
         </button>
       </div>
     </li>`;
-}
+};
 
-function generateShoppingItemsString(shoppingList) {
+const generateShoppingItemsString = function (shoppingList) {
   const items = shoppingList.map((item) => generateItemElement(item));
   return items.join('');
-}
+};
 
-function generateError(message) {
+const generateError = function (message) {
   return `
       <section class="error-content">
         <button id="cancel-error">X</button>
         <p>${message}</p>
       </section>
     `;
-}
+};
 
-function renderError() {
+const renderError = function () {
   if (store.error) {
     const el = generateError(store.error);
     $('.error-container').html(el);
   } else {
     $('.error-container').empty();
   }
-}
+};
 
-function handleCloseError() {
+const handleCloseError = function () {
   $('.error-container').on('click', '#cancel-error', () => {
     store.setError(null);
     renderError();
   });
-}
+};
 
-function render() {
+const render = function () {
   renderError();
 
   // Filter item list if store prop is true by item.checked === false
@@ -71,9 +71,9 @@ function render() {
 
   // insert that HTML into the DOM
   $('.js-shopping-list').html(shoppingListItemsString);
-}
+};
 
-function handleNewItemSubmit() {
+const handleNewItemSubmit = function () {
   $('#js-shopping-list-form').submit(function (event) {
     event.preventDefault();
     const newItemName = $('.js-shopping-list-entry').val();
@@ -88,15 +88,15 @@ function handleNewItemSubmit() {
         renderError();
       });
   });
-}
+};
 
-function getItemIdFromElement(item) {
+const getItemIdFromElement = function (item) {
   return $(item)
     .closest('.js-item-element')
     .data('item-id');
-}
+};
 
-function handleItemCheckClicked() {
+const handleItemCheckClicked = function () {
   $('.js-shopping-list').on('click', '.js-item-toggle', event => {
     const id = getItemIdFromElement(event.currentTarget);
     const item = store.findById(id);
@@ -111,9 +111,9 @@ function handleItemCheckClicked() {
         renderError();
       });
   });
-}
+};
 
-function handleDeleteItemClicked() {
+const handleDeleteItemClicked = function () {
   $('.js-shopping-list').on('click', '.js-item-delete', event => {
     const id = getItemIdFromElement(event.currentTarget);
 
@@ -128,9 +128,9 @@ function handleDeleteItemClicked() {
         renderError();
       });
   });
-}
+};
 
-function handleEditShoppingItemSubmit() {
+const handleEditShoppingItemSubmit = function () {
   $('.js-shopping-list').on('submit', '.js-edit-item', event => {
     event.preventDefault();
     const id = getItemIdFromElement(event.currentTarget);
@@ -147,23 +147,23 @@ function handleEditShoppingItemSubmit() {
         renderError();
       });
   });
-}
+};
 
-function handleToggleFilterClick() {
+const handleToggleFilterClick = function () {
   $('.js-filter-checked').click(() => {
     store.toggleCheckedFilter();
     render();
   });
-}
+};
 
-function bindEventListeners() {
+const bindEventListeners = function () {
   handleNewItemSubmit();
   handleItemCheckClicked();
   handleDeleteItemClicked();
   handleEditShoppingItemSubmit();
   handleToggleFilterClick();
   handleCloseError();
-}
+};
 
 // This object contains the only exposed methods from this module:
 export default {
