@@ -5,9 +5,9 @@ import './index.css';
 
 import shoppingList from './shopping-list';
 
-function main() {
+const main = function () {
   shoppingList.bindEventListeners();
   shoppingList.render();
-}
+};
 
 $(main);
