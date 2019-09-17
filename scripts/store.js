@@ -3,11 +3,11 @@ import item from './item.js';
 const items = [];
 let hideCheckeditems = false;
 
-const findById = function (id) {
+const findById = function(id) {
   return this.items.find(item => item.id === id);
 };
 
-const addItem = function (name) {
+const addItem = function(name) {
   try {
     item.validateName(name);
     this.items.push(item.create(name));
