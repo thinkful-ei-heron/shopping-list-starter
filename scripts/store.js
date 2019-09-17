@@ -2,7 +2,6 @@ import item from './item.js';
 
 const items = [];
 let hideCheckeditems = false;
-let searchTerm = '';
 
 const findById = function (id) {
   return this.items.find(item => item.id === id);
@@ -40,19 +39,13 @@ const toggleCheckedFilter = function () {
   this.hideCheckedItems = !this.hideCheckedItems;
 };
 
-const setSearchTerm = function (term) {
-  this.searchTerm = term;
-};
-
 export default {
   items,
   hideCheckeditems,
-  searchTerm,
   findById,
   addItem,
   findAndToggleChecked,
   findAndUpdateName,
   findAndDelete,
-  toggleCheckedFilter,
-  setSearchTerm
+  toggleCheckedFilter
 };

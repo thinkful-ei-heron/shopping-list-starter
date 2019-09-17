@@ -37,11 +37,6 @@ function render() {
     items = items.filter(item => !item.checked);
   }
 
-  // Filter item list if store prop `searchTerm` is not empty
-  if (store.searchTerm) {
-    items = items.filter(item => item.name.includes(store.searchTerm));
-  }
-
   // render the shopping list in the DOM
   const shoppingListItemsString = generateShoppingItemsString(items);
 
@@ -115,7 +110,6 @@ function handleToggleFilterClick() {
 function handleShoppingListSearch() {
   $('.js-shopping-list-search-entry').on('keyup', event => {
     const val = $(event.currentTarget).val();
-    store.setSearchTerm(val);
     render();
   });
 }
