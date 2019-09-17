@@ -1,7 +1,6 @@
 const store = {
   items: [],
-  hideCheckedItems: false,
-  searchTerm: ''
+  hideCheckedItems: false
 };
 
 function generateItemElement(item) {
@@ -40,11 +39,6 @@ function render() {
   let items = [...store.items];
   if (store.hideCheckedItems) {
     items = items.filter(item => !item.checked);
-  }
-
-  // Filter item list if store prop `searchTerm` is not empty
-  if (store.searchTerm) {
-    items = items.filter(item => item.name.includes(store.searchTerm));
   }
 
   // render the shopping list in the DOM
@@ -103,11 +97,6 @@ function toggleCheckedItemsFilter() {
   store.hideCheckedItems = !store.hideCheckedItems;
 }
 
-function setSearchTerm(val) {
-  store.searchTerm = val;
-}
-
-
 function handleDeleteItemClicked() {
   // like in `handleItemCheckClicked`, we use event delegation
   $('.js-shopping-list').on('click', '.js-item-delete', event => {
@@ -137,21 +126,12 @@ function handleToggleFilterClick() {
   });
 }
 
-function handleShoppingListSearch() {
-  $('.js-shopping-list-search-entry').on('keyup', event => {
-    const val = $(event.currentTarget).val();
-    setSearchTerm(val);
-    render();
-  });
-}
-
 function bindEventListeners() {
   handleNewItemSubmit();
   handleItemCheckClicked();
   handleDeleteItemClicked();
   handleEditShoppingItemSubmit();
   handleToggleFilterClick();
-  handleShoppingListSearch();
 }
 
 // This object contains the only exposed methods from this module:
