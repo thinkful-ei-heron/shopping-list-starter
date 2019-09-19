@@ -12,9 +12,7 @@ const generateItemElement = function (item) {
   let itemTitle = `<span class='shopping-item shopping-item__checked'>${item.name}</span>`;
   if (!item.checked) {
     itemTitle = `
-      <form class='js-edit-item'>
-        <input class='shopping-item' type='text' value='${item.name}' />
-      </form>
+     <span class='shopping-item'>${item.name}</span>
     `;
   }
 
