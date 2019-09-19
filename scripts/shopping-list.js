@@ -65,7 +65,6 @@ const toggleCheckedForListItem = function (id) {
   foundItem.checked = !foundItem.checked;
 };
 
-
 const getItemIdFromElement = function (item) {
   return $(item)
     .closest('.js-item-element')
@@ -90,6 +89,7 @@ const editListItemName = function (id, itemName) {
   item.name = itemName;
 };
 
+// Toggles the store.hideCheckedItems property
 const toggleCheckedItemsFilter = function () {
   store.hideCheckedItems = !store.hideCheckedItems;
 };
