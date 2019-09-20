@@ -38,10 +38,8 @@ const render = function () {
   if (store.hideCheckedItems) {
     items = items.filter(item => !item.checked);
   }
-
   // render the shopping list in the DOM
   const shoppingListItemsString = generateShoppingItemsString(items);
-
   // insert that HTML into the DOM
   $('.js-shopping-list').html(shoppingListItemsString);
 };
@@ -65,12 +63,6 @@ const toggleCheckedForListItem = function (id) {
   foundItem.checked = !foundItem.checked;
 };
 
-const getItemIdFromElement = function (item) {
-  return $(item)
-    .closest('.js-item-element')
-    .data('item-id');
-};
-
 const handleItemCheckClicked = function () {
   $('.js-shopping-list').on('click', '.js-item-toggle', event => {
     const id = getItemIdFromElement(event.currentTarget);
@@ -79,19 +71,19 @@ const handleItemCheckClicked = function () {
   });
 };
 
+const getItemIdFromElement = function (item) {
+  return $(item)
+    .closest('.js-item-element')
+    .data('item-id');
+};
+
+/**
+ * Responsible for deleting a list item.
+ * @param {string} id 
+ */
 const deleteListItem = function (id) {
   const index = store.items.findIndex(item => item.id === id);
   store.items.splice(index, 1);
-};
-
-const editListItemName = function (id, itemName) {
-  const item = store.items.find(item => item.id === id);
-  item.name = itemName;
-};
-
-// Toggles the store.hideCheckedItems property
-const toggleCheckedItemsFilter = function () {
-  store.hideCheckedItems = !store.hideCheckedItems;
 };
 
 const handleDeleteItemClicked = function () {
@@ -106,19 +98,35 @@ const handleDeleteItemClicked = function () {
   });
 };
 
+const editListItemName = function (id, itemName) {
+  const item = store.items.find(item => item.id === id);
+  item.name = itemName;
+};
+
+/**
+ * Toggles the store.hideCheckedItems property
+ */
+const toggleCheckedItemsFilter = function () {
+  store.hideCheckedItems = !store.hideCheckedItems;
+};
+
+/**
+ * Places an event listener on the checkbox
+ * for hiding completed items.
+ */
+const handleToggleFilterClick = function () {
+  $('.js-filter-checked').click(() => {
+    toggleCheckedItemsFilter();
+    render();
+  });
+};
+
 const handleEditShoppingItemSubmit = function () {
   $('.js-shopping-list').on('submit', '.js-edit-item', event => {
     event.preventDefault();
     const id = getItemIdFromElement(event.currentTarget);
     const itemName = $(event.currentTarget).find('.shopping-item').val();
     editListItemName(id, itemName);
-    render();
-  });
-};
-
-const handleToggleFilterClick = function () {
-  $('.js-filter-checked').click(() => {
-    toggleCheckedItemsFilter();
     render();
   });
 };
