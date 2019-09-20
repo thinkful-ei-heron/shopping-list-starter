@@ -62,14 +62,6 @@ const getItemIdFromElement = function (item) {
     .data('item-id');
 };
 
-const handleItemCheckClicked = function () {
-  $('.js-shopping-list').on('click', '.js-item-toggle', event => {
-    const id = getItemIdFromElement(event.currentTarget);
-    store.findAndToggleChecked(id);
-    render();
-  });
-};
-
 const handleDeleteItemClicked = function () {
   // like in `handleItemCheckClicked`, we use event delegation
   $('.js-shopping-list').on('click', '.js-item-delete', event => {
@@ -92,16 +84,17 @@ const handleEditShoppingItemSubmit = function () {
   });
 };
 
-const handleToggleFilterClick = function () {
-  $('.js-filter-checked').click(() => {
-    store.toggleCheckedFilter();
+const handleItemCheckClicked = function () {
+  $('.js-shopping-list').on('click', '.js-item-toggle', event => {
+    const id = getItemIdFromElement(event.currentTarget);
+    store.findAndToggleChecked(id);
     render();
   });
 };
 
-const handleShoppingListSearch = function () {
-  $('.js-shopping-list-search-entry').on('keyup', event => {
-    const val = $(event.currentTarget).val();
+const handleToggleFilterClick = function () {
+  $('.js-filter-checked').click(() => {
+    store.toggleCheckedFilter();
     render();
   });
 };
@@ -112,7 +105,6 @@ const bindEventListeners = function () {
   handleDeleteItemClicked();
   handleEditShoppingItemSubmit();
   handleToggleFilterClick();
-  handleShoppingListSearch();
 };
 // This object contains the only exposed methods from this module:
 export default {
