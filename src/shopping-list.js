@@ -121,7 +121,6 @@ const handleEditShoppingItemSubmit = function () {
     api.updateItem(id, { name: itemName })
       .then(() => {
         store.findAndUpdate(id, { name: itemName });
-        store.setItemIsEditing(id, false);
         render();
       })
       .catch((err) => {
