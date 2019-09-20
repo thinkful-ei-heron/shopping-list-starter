@@ -4,6 +4,8 @@
 
 body {
   font-family: 'Roboto', sans-serif;
+  width: 85%;
+  margin: 0 auto;
 }
 
 button, input[type="text"] {
