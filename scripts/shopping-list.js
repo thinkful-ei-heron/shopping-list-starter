@@ -44,16 +44,6 @@ const render = function () {
   $('.js-shopping-list').html(shoppingListItemsString);
 };
 
-const addItemToShoppingList = function (itemName) {
-  try {
-    item.validateName(itemName);
-    store.items.push(item.create(itemName));
-    render();
-  } catch (error) {
-    console.log(`Cannot add item: ${error.message}`);
-  }
-};
-
 const handleNewItemSubmit = function () {
   $('#js-shopping-list-form').submit(function (event) {
     event.preventDefault();
@@ -64,18 +54,18 @@ const handleNewItemSubmit = function () {
   });
 };
 
-const getItemIdFromElement = function (item) {
-  return $(item)
-    .closest('.js-item-element')
-    .data('item-id');
-};
-
 const handleItemCheckClicked = function () {
   $('.js-shopping-list').on('click', '.js-item-toggle', event => {
     const id = getItemIdFromElement(event.currentTarget);
     store.findAndToggleChecked(id);
     render();
   });
+};
+
+const getItemIdFromElement = function (item) {
+  return $(item)
+    .closest('.js-item-element')
+    .data('item-id');
 };
 
 const handleDeleteItemClicked = function () {
@@ -107,20 +97,12 @@ const handleToggleFilterClick = function () {
   });
 };
 
-const handleShoppingListSearch = function () {
-  $('.js-shopping-list-search-entry').on('keyup', event => {
-    const val = $(event.currentTarget).val();
-    render();
-  });
-};
-
 const bindEventListeners = function () {
   handleNewItemSubmit();
   handleItemCheckClicked();
   handleDeleteItemClicked();
   handleEditShoppingItemSubmit();
   handleToggleFilterClick();
-  handleShoppingListSearch();
 };
 
 // This object contains the only exposed methods from this module:
