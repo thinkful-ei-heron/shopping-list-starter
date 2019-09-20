@@ -96,23 +96,6 @@ const getItemIdFromElement = function (item) {
     .data('item-id');
 };
 
-const handleItemCheckClicked = function () {
-  $('.js-shopping-list').on('click', '.js-item-toggle', event => {
-    const id = getItemIdFromElement(event.currentTarget);
-    const item = store.findById(id);
-    api.updateItem(id, { checked: !item.checked })
-      .then(() => {
-        store.findAndUpdate(id, { checked: !item.checked });
-        render();
-      })
-      .catch((err) => {
-        console.log(err);
-        store.setError(err.message);
-        renderError();
-      });
-  });
-};
-
 const handleDeleteItemClicked = function () {
   $('.js-shopping-list').on('click', '.js-item-delete', event => {
     const id = getItemIdFromElement(event.currentTarget);
@@ -143,6 +126,22 @@ const handleEditShoppingItemSubmit = function () {
       })
       .catch((err) => {
         console.log(err);
+        store.setError(err.message);
+        renderError();
+      });
+  });
+};
+
+const handleItemCheckClicked = function () {
+  $('.js-shopping-list').on('click', '.js-item-toggle', event => {
+    const id = getItemIdFromElement(event.currentTarget);
+    const item = store.findById(id);
+    api.updateItem(id, { checked: !item.checked })
+      .then(() => {
+        store.findAndUpdate(id, { checked: !item.checked });
+        render();
+      })
+      .catch((err) => {
         store.setError(err.message);
         renderError();
       });

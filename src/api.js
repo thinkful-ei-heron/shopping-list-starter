@@ -45,7 +45,7 @@ const listApiFetch = function (...args) {
 
 const getItems = function () {
   return listApiFetch(`${BASE_URL}/items`);
-}
+};
 
 const createItem = function (name) {
   const newItem = JSON.stringify({ name });
