@@ -32,7 +32,7 @@ const findAndUpdateName = function (id, name) {
 };
 
 const findAndDelete = function (id) {
-  this.items = this.items.filter(item => item.id !== id);
+  this.items = this.items.filter(currentItem => currentItem.id !== id);
 };
 
 const toggleCheckedFilter = function () {
